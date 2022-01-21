@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/SmartHomeDemo/static/css/main.eba9b891.css",
+    "main.js": "/SmartHomeDemo/static/js/main.7235392a.js",
+    "index.html": "/SmartHomeDemo/index.html",
+    "main.eba9b891.css.map": "/SmartHomeDemo/static/css/main.eba9b891.css.map",
+    "main.7235392a.js.map": "/SmartHomeDemo/static/js/main.7235392a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eba9b891.css",
+    "static/js/main.7235392a.js"
+  ]
+}

@@ -2,6 +2,7 @@
   "name": "smarthome",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://gadi9889.github.io/SmartHomeDemo",
   "dependencies": {
     "@iconify/react": "^3.1.2",
     "@testing-library/jest-dom": "^5.16.1",
@@ -16,6 +17,7 @@
     "web-vitals": "^2.1.3"
   },
   "scripts": {
+    "deploy":"npm run build&&gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
