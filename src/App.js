@@ -1,11 +1,14 @@
 import './App.css';
-import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router,useLocation, Routes, Route, Link} from 'react-router-dom';
 import CreateRoom from './components/CreateRoom';
+import Header from './components/Header'
 import Room from './components/Room';
 import { useState } from 'react';
+import { motion, AnimatePresence,useCycle } from "framer-motion"
 import { type } from '@testing-library/user-event/dist/type';
 
 function App() {
+  let location = useLocation();
 
   const [rooms, setRooms] = useState([])
   const [airCons, setAirCons] = useState([''])
@@ -14,6 +17,7 @@ function App() {
   const [stereos, setStereos] = useState([''])
 
   const createroom = (name,type,color) => {
+
     if (rooms.length != 0) {
       setRooms([...rooms,
         {
@@ -128,16 +132,24 @@ function App() {
     });
   }
 
+  const hex2rgb = (hex) => {
+    const r = parseInt(hex.slice(1, 3), 16)
+    const g = parseInt(hex.slice(3, 5), 16)
+    const b = parseInt(hex.slice(5, 7), 16)
+    return textColorSet([ r, g, b ])
+  }
+
+  const textColorSet = (roomColor) => {
+    const brightness = ((roomColor[0] * 299) + (roomColor[1] * 587) + (roomColor[2] * 114)) / 1000;
+    return (brightness > 155) ? 'black':'white';
+  }
+
   return (
     <div className="App">
-      <div id='main-out-line'>
-      <h1>Smart Home</h1>
-      <Router>
-        {rooms.map((room) => {
-          return <Link to={'/'+room.type+'/'+room.name+'-'+room.index}><button style={{backgroundColor: room.color}}>{room.name}</button></Link>
-        })}
-        <Link to='/CreateRoom'><button>+</button></Link>
-        <Routes>
+      <div>
+        <AnimatePresence exitBeforeEnter>
+        <Header rooms={rooms} />
+        <Routes location={location} key={location.key}>
           <Route exact path='/' element={<h2>Welcome To Your Smart Home <br /><br /> Press + To Begin</h2>} />
           <Route exact path='/CreateRoom' element={<CreateRoom createRoomFunc={createroom}/>} />
           {rooms.map((room) => {
@@ -147,6 +159,7 @@ function App() {
                 roomIndex={room.index}
                 roomType={room.type}
                 roomColor={room.color}
+                fontColor={hex2rgb(room.color)}
                 roomItems={room.items}
                 airCons={airCons}
                 heaters={heaters}
@@ -161,7 +174,7 @@ function App() {
             } />
           })}
         </Routes>
-      </Router>
+        </AnimatePresence>
       </div>
     </div>
   );

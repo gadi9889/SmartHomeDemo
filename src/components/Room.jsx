@@ -1,7 +1,33 @@
 import React from 'react'
 import CreateProducts from './CreateProducts';
 import Product from './Product';
+import { Icon } from '@iconify/react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+const roomVariants = {
+    hidden: {
+        opacity:0,
+        y:'40vh'
+    },
+    visible: {
+        scale:1,
+        opacity:1,
+        y:0,
+        transition: {
+            duration:1,
+            ease:"easeIn"
+        }
+    },
+    exit: {
+        opacity:0,
+        x:"-5vh",
+        transition: {
+            duration:1,
+            ease:"easeInOut"
+        }
+    }
+}
 
 export default function Room(props) {
     let flag = true;
@@ -55,14 +81,7 @@ export default function Room(props) {
         return
     }
 
-    const colorSet = (status) => {
-        if (status) {
-            return 'red'
-        }
-        else {
-            return 'black'
-        }
-    }
+    
 
     const update = (i) => {
         setRender(i)
@@ -77,7 +96,6 @@ export default function Room(props) {
             return <Product 
                 update={update} 
                 status={product.status} 
-                color={colorSet(product.status)} 
                 index={product.index} 
                 logoName={logoName} 
                 power={productPower}
@@ -86,8 +104,13 @@ export default function Room(props) {
     }
 
     return (
-        <div>
-            <h3 style={{color:props.roomColor}}>{props.roomName}</h3>
+        <motion.div 
+            variants={roomVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+        >
+            <h3 style={{backgroundColor:props.roomColor,color:props.fontColor}}>{props.roomName}</h3>
             <h4>{props.roomType}</h4>
 
             <div id="product-grid">
@@ -100,8 +123,8 @@ export default function Room(props) {
                 {props.stereos.map((stereo) => checkProductInRoom(props.roomIndex,stereo,props.stereoPower,"bx:bxs-music"))}
             </div>
 
-            <button class={'product-add-button'} onClick={addDirect}>+</button>
+            <button className={'product-add-button'} onClick={addDirect}><Icon style={{fontSize:'28px'}} icon="akar-icons:circle-plus-fill" /></button>
             {addProduct}
-        </div>
+        </motion.div>
     )
 }

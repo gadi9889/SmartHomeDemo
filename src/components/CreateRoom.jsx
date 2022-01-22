@@ -1,5 +1,32 @@
 import React from 'react'
 import { useState } from 'react'
+import { Icon } from '@iconify/react';
+import { motion } from 'framer-motion';
+
+const createRoomVariants = {
+    hidden: {
+        opacity:0,
+        y:'10vh'
+    },
+    visible: {
+        scale:1,
+        opacity:1,
+        y:0,
+        transition: {
+            duration:1,
+            ease:"easeIn"
+        }
+    },
+    exit: {
+        opacity:0,
+        x:"5vh",
+        originY:0,
+        transition: {
+            duration:1,
+            ease:"easeInOut"
+        }
+    }
+}
 
 export default function CreateRoom(props) {
     const [name, setName] = useState()
@@ -19,7 +46,12 @@ export default function CreateRoom(props) {
         }
     }
     return (
-        <div>
+        <motion.div
+            variants={createRoomVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+        >
             <input type="text" onChange={getName} placeholder='Room name'/> <br/>
             <select name="type" id="type" onChange={getType}> 
                 <option value="livingRoom">Living Room</option>
@@ -33,7 +65,7 @@ export default function CreateRoom(props) {
             </div>
             <h3>Room Color</h3>
             <br/>
-            <button class='product-add-button' onClick={() => createRoom(name,type,color)}>Add</button>
-        </div>
+            <button className={'product-add-button'} onClick={() => createRoom(name,type,color)}><Icon style={{fontSize:'28px'}} icon="akar-icons:circle-plus-fill" /></button>
+        </motion.div>
     )
 }

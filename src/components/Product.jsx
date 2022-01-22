@@ -3,14 +3,16 @@ import { useState} from 'react';
 import { Icon } from '@iconify/react';
 
 export default function Product(props) {
-    const [color, setColor] = useState(props.color)
-    const [backgroundColor, setBackgroundColor] = useState('white');
-
+    let logoColorArr = ['black','red']
+    let backgroundColorArr = ['white','grey']
     let status = !props.status
+
+    const [logoColor, setLogoColor] = useState(status ? logoColorArr[0]:logoColorArr[1])
+    const [backgroundColor, setBackgroundColor] = useState(status ? backgroundColorArr[0]:backgroundColorArr[1]);
 
     const statusChange = (status) => {
         props.power(props.index)
-        setColor(colorSet(status))
+        setLogoColor(colorSet(status))
         props.update(Math.random());
     }
 
@@ -25,7 +27,7 @@ export default function Product(props) {
 
     return (
         <div>
-            <button class="product" style={{color:color,backgroundColor:backgroundColor}} onClick={() => statusChange(status)}><Icon icon={props.logoName} style={{ fontSize: '36px' }}/></button>
+            <button class="product" style={{color:logoColor,backgroundColor:backgroundColor}} onClick={() => statusChange(status)}><Icon icon={props.logoName} style={{ fontSize: '36px' }}/></button>
         </div>
     )
 }

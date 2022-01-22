@@ -2,10 +2,12 @@
   display: flex;
   justify-content: center;
   text-align: center;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   overflow: hidden;
+  background-color: rgba(0,0,0,0.02);
 }
 
 .App-header {
@@ -36,12 +38,6 @@ button {
   transition: 0.5s;
 }
 
-#main-out-line {
-  width: 70vw;
-  height: 98vh;
-  box-shadow: 0 0px 0px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
-}
-
 button:hover {
   background-color: darkgrey;
   box-shadow: 0 0px 0px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
@@ -55,7 +51,7 @@ input:hover ,select:hover {
 }
 
 input[type=text], select {
-  width: 30%;
+  width: 40%;
   text-align: center;
   padding: 12px 20px;
   margin: 8px 0;
@@ -77,7 +73,7 @@ input[type=color] {
   width: 4vw;
   height: 8vh;
   border-radius: 100%;
-  margin-left: 33vw;
+  margin-left: 48vw;
 }
 
 #product-grid {
@@ -106,7 +102,7 @@ input[type=color] {
 
 .product-add-button {
   width: 12vw;
-  height: 12vh;
+  height: 13vh;
   font-weight: bolder;
   border-radius: 100px;
   font-size: 150%;

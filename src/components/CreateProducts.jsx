@@ -1,4 +1,5 @@
 import React from 'react'
+import { Icon } from '@iconify/react';
 
 export default function CreateProducts(props) {
     let product = 'ac';
@@ -20,7 +21,7 @@ export default function CreateProducts(props) {
                 {props.heater}
                 {props.stereo}
             </select>
-            <button class='product-add-button' onClick={clickHandle}>Add</button>
+            <button class='product-add-button' onClick={clickHandle}><Icon style={{fontSize:'28px'}} icon="ic:baseline-done" /></button>
         </div>
     )
 }
