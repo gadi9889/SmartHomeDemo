@@ -8,55 +8,38 @@ import { motion } from 'framer-motion';
 const roomVariants = {
     hidden: {
         opacity:0,
+        x:'10vh',
         y:'40vh'
     },
     visible: {
         scale:1,
         opacity:1,
         y:0,
+        x:0,
         transition: {
-            duration:1,
-            ease:"easeIn"
+            duration:0.8,
+            ease:"easeIn",
+            type:'spring',
+            stiffness:80
         }
     },
     exit: {
         opacity:0,
         x:"-5vh",
+        y:"5vh",
         transition: {
-            duration:1,
+            duration:0.3,
             ease:"easeInOut"
         }
     }
 }
 
 export default function Room(props) {
-    let flag = true;
-
-    const [addProduct, setAddProduct] = useState()
     const [render, setRender] = useState()
+    const [isVisible, setIsVisible] = useState(false);
 
-    const addDirect = () => {
-        let heaterOp = isRoomBathroom(props.roomType)
-        let stereoOp = isStereoInRoom(props.stereos,props.roomIndex)
-        if (props.roomItems == 5) {
-            window.alert("Reached the limit")
-        }
-        else if (flag == true) {
-            setAddProduct(<CreateProducts 
-                roomIndex={props.roomIndex} 
-                addDirect={addDirect} 
-                addProductsFunc={props.addProductsFunc} 
-                items={props.roomItems} 
-                heater={heaterOp} 
-                stereo={stereoOp}
-                />
-            )
-            flag = false;
-        }
-        else {
-            flag = true;
-            setAddProduct();
-        }
+    const change = () => {
+        setIsVisible(false)
     }
 
     const isStereoInRoom = (stereos,roomIndex) => {
@@ -81,8 +64,17 @@ export default function Room(props) {
         return
     }
 
-    
+    let heaterOp = isRoomBathroom(props.roomType)
+    let stereoOp = isStereoInRoom(props.stereos,props.roomIndex)
 
+    const addDirect = () => {
+        if (props.roomItems == 5) {
+            window.alert("Reached the limit")
+        }
+        else {
+            setIsVisible(true)
+        }
+    }
     const update = (i) => {
         setRender(i)
     }
@@ -92,7 +84,6 @@ export default function Room(props) {
             return
         }
         if (roomIndex == product.roomIndex) {
-            console.log(props.roomIndex)
             return <Product 
                 update={update} 
                 status={product.status} 
@@ -104,6 +95,7 @@ export default function Room(props) {
     }
 
     return (
+        <div>
         <motion.div 
             variants={roomVariants}
             initial="hidden"
@@ -124,7 +116,17 @@ export default function Room(props) {
             </div>
 
             <button className={'product-add-button'} onClick={addDirect}><Icon style={{fontSize:'28px'}} icon="akar-icons:circle-plus-fill" /></button>
-            {addProduct}
         </motion.div>
+        {<CreateProducts
+            roomIndex={props.roomIndex} 
+            addDirect={addDirect} 
+            addProductsFunc={props.addProductsFunc} 
+            items={props.roomItems} 
+            heater={heaterOp} 
+            stereo={stereoOp}
+            isVisible={isVisible}
+            func={change}
+            />}
+        </div>
     )
 }

@@ -6,23 +6,28 @@ import { motion } from 'framer-motion';
 const createRoomVariants = {
     hidden: {
         opacity:0,
-        y:'10vh'
+        y:'10vh',
+        x:'-5vh'
     },
     visible: {
         scale:1,
         opacity:1,
         y:0,
+        x:0,
         transition: {
-            duration:1,
-            ease:"easeIn"
+            duration:0.5,
+            ease:"easeIn",
+            type:'spring',
+            stiffness:80
         }
     },
     exit: {
         opacity:0,
         x:"5vh",
+        y:'5vh',
         originY:0,
         transition: {
-            duration:1,
+            duration:0.5,
             ease:"easeInOut"
         }
     }

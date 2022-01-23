@@ -146,9 +146,10 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <div id="container">
+        <Header rooms={rooms} visible={true}/>
+
         <AnimatePresence exitBeforeEnter>
-        <Header rooms={rooms} />
         <Routes location={location} key={location.key}>
           <Route exact path='/' element={<h2>Welcome To Your Smart Home <br /><br /> Press + To Begin</h2>} />
           <Route exact path='/CreateRoom' element={<CreateRoom createRoomFunc={createroom}/>} />
