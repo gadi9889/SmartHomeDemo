@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from './dropdown/ErrorMessage';
 
 const createRoomVariants = {
     hidden: {

@@ -1,10 +1,10 @@
 import React from 'react'
-import CreateProducts from './CreateProducts';
+import CreateProducts from './dropdown/CreateProducts';
 import Product from './Product';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import ErrorMessage from './ErrorMessage'
+import ErrorMessage from './dropdown/ErrorMessage'
 
 const roomVariants = {
     hidden: {
@@ -110,13 +110,13 @@ export default function Room(props) {
             <h4>{props.roomType}</h4>
 
             <div id="product-grid">
-                {props.airCons.map((airCon) => checkProductInRoom(props.roomIndex,airCon,props.airConPower,"mdi:air-conditioner"))}
+                {props.airCons.map((airCon) => checkProductInRoom(props.roomIndex,airCon,props.airConPower,"ac"))}
 
-                {props.heaters.map((heater) => checkProductInRoom(props.roomIndex,heater,props.heaterPower,"fa-solid:hot-tub"))}
+                {props.heaters.map((heater) => checkProductInRoom(props.roomIndex,heater,props.heaterPower,"heater"))}
 
-                {props.lights.map((light) => checkProductInRoom(props.roomIndex,light,props.lightPower,"bi:lightbulb-fill"))}
+                {props.lights.map((light) => checkProductInRoom(props.roomIndex,light,props.lightPower,"lightbulb"))}
 
-                {props.stereos.map((stereo) => checkProductInRoom(props.roomIndex,stereo,props.stereoPower,"bx:bxs-music"))}
+                {props.stereos.map((stereo) => checkProductInRoom(props.roomIndex,stereo,props.stereoPower,"stereo"))}
             </div>
 
             <button className={'product-add-button'} onClick={addDirect}><Icon style={{fontSize:'28px',position:'absolute'}} icon="akar-icons:circle-plus-fill" /></button>
