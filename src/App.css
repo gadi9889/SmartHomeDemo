@@ -51,8 +51,8 @@ button {
 }
 
 #error-container {
-  width: 40%;
-  height: 30%;
+  width: clamp(20%,250px,89%);
+  height: min(90%,150px);
   border: solid rgb(93, 0, 168) 5px;
   margin: auto;
   padding: 3%;
@@ -105,7 +105,7 @@ input[type=color] {
 }
 
 .create-product-container {
-  width: clamp(90%,20%);
+  width: clamp(20%,300px,70%);
   height: 30%;
   border: solid rgb(93, 0, 168) 5px;
   margin: auto;
@@ -148,7 +148,7 @@ input[type=color] {
 }
 
 #product-selector {
-  width: 12vw;
+  width: clamp(40%,200px);
   height: 10vh;
 }
 
@@ -162,7 +162,7 @@ input[type=color] {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  width: 12vw;
+  width: clamp(30%,180px);
   height: 13vh;
   font-weight: bolder;
   border-radius: 100px;

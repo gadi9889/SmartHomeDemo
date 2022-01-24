@@ -39,7 +39,7 @@ export default function CreateRoom(props) {
     const [type, setType] = useState('livingRoom')
     const [color, setColor] = useState('#000000')
     const [isErrorVisible, setIsErrorVisible] = useState(false);
-    let message = ['a room name must be below 5 letters','you cant have a nameless room.can you?']
+    let message = ['a room name must be below 5 letters','you cant have a nameless room can you?']
 
     const getName = (e) => setName((e.target.value))
     const getType = (e) => setType(e.target.value)

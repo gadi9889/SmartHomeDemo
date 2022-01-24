@@ -99,7 +99,7 @@ export default function Room(props) {
     }
 
     return (
-        <div>
+        <div style={{width:'100vw'}}>
         <motion.div 
             variants={roomVariants}
             initial="hidden"
