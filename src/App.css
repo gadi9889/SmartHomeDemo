@@ -30,6 +30,9 @@
 }
 
 button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 0.4px solid rgba(0,0,0,0.01);
   color: black;
   padding: 15px 32px;
@@ -40,6 +43,22 @@ button {
   margin: 4px 2px;
   border-radius: 2px;
   transition: 0.5s;
+}
+
+.icon {
+  font-size: 100px;
+  position:'absolute'
+}
+
+#error-container {
+  width: 40%;
+  height: 30%;
+  border: solid rgb(93, 0, 168) 5px;
+  margin: auto;
+  padding: 3%;
+  background-color: rgba(255,255,255,0.9);
+  border-radius: 50px;
+  overflow: hidden;
 }
 
 button:hover {
@@ -76,8 +95,7 @@ input[type=color] {
   overflow: hidden;
   width: 4vw;
   height: 8vh;
-  border-radius: 100%;
-  margin-left: 48vw;
+  margin: 0 auto;
 }
 
 #product-grid {
@@ -89,7 +107,7 @@ input[type=color] {
 .create-product-container {
   width: 20%;
   height: 30%;
-  border: solid black 5px;
+  border: solid rgb(93, 0, 168) 5px;
   margin: auto;
   padding: 3%;
   background-color: rgba(255,255,255,0.9);
@@ -97,9 +115,9 @@ input[type=color] {
   overflow: hidden;
 }
 
-.create-product-background {
+#dropdown-background {
   display: flex;
-  position: fixed;
+  position: absolute;
   top:0;
   left:0;
   width: 100vw;
@@ -111,8 +129,8 @@ input[type=color] {
 
 .product {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   border-radius: 100px;
   width: 12vw;
   height: 15vh;
@@ -130,6 +148,10 @@ input[type=color] {
 }
 
 .product-add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
   width: 12vw;
   height: 13vh;
   font-weight: bolder;

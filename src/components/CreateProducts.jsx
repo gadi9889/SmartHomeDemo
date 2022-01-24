@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Icon } from '@iconify/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { isVisible } from '@testing-library/user-event/dist/utils';
+import Background from './Background';
 
 const createProductContainerVariants = {
     hidden: {
@@ -27,15 +28,6 @@ const createProductContainerVariants = {
     }
 }
 
-const createProductBackgroundVariants = {
-    hidden: {
-        opacity:0
-    },
-    visible: {
-        opacity:1
-    }
-} 
-
 export default function CreateProducts(props) {
     let product = 'ac';
     
@@ -49,18 +41,14 @@ export default function CreateProducts(props) {
     return (
         <AnimatePresence >
             {props.isVisible && (
-                <motion.div className='create-product-background' onClick={() => props.func(false)}
-                    variants={createProductBackgroundVariants}
-                    initial='hidden'
-                    animate='visible'
-                    exit='hidden'
-                >
+                <Background onClick={props.func}>
                     <motion.div className='create-product-container' onClick={(e) => e.stopPropagation()}
                         variants={createProductContainerVariants}
                         initial='hidden'
                         animate='visible'
                         exit='exit'
                     >
+                        <h4 style={{color:'purple',margin:'0',fontWeight:'bold'}}>Select Your Product</h4>
                         <select name="product" id="product-selector" onChange={getProduct}> 
                             <option value="ac" id="ac">AC</option>
                             <option value="light" id="light">Light</option>
@@ -68,9 +56,11 @@ export default function CreateProducts(props) {
                             {props.stereo}
                         </select>
                         <br />
-                        <button class='product-add-button' onClick={clickHandle}><Icon style={{fontSize:'28px'}} icon="ic:baseline-done" /></button>
+                        <button className='product-add-button' onClick={clickHandle}>
+                            <Icon className='icon' style={{fontSize:'28px'}} icon="ic:baseline-done" />
+                        </button>
                     </motion.div>
-                </motion.div>
+                </Background>
             )}
         </AnimatePresence>
 

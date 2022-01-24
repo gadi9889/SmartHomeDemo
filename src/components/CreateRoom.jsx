@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
+import ErrorMessage from './ErrorMessage';
 
 const createRoomVariants = {
     hidden: {
@@ -37,13 +38,23 @@ export default function CreateRoom(props) {
     const [name, setName] = useState()
     const [type, setType] = useState('livingRoom')
     const [color, setColor] = useState('#000000')
+    const [isErrorVisible, setIsErrorVisible] = useState(false);
+    let message = ['a room name must be below 5 letters','you cant have a nameless room.can you?']
 
     const getName = (e) => setName((e.target.value))
     const getType = (e) => setType(e.target.value)
     const getColor = (e) => setColor(e.target.value)
+
+    const messagePicker = () => {
+        if (name != null) {
+            return message[0]
+        }
+        return message[1]
+    }
+
     const createRoom = (name,type,color) => {
-        if (name.length > 5) {
-            window.alert("enter a valid name")
+        if (name == null || name.length > 5 || name.length == 0) {
+            setIsErrorVisible(true)
         }
         else{
             props.createRoomFunc(name,type,color)
@@ -51,6 +62,7 @@ export default function CreateRoom(props) {
         }
     }
     return (
+        <div>
         <motion.div
             variants={createRoomVariants}
             initial="hidden"
@@ -70,7 +82,11 @@ export default function CreateRoom(props) {
             </div>
             <h3>Room Color</h3>
             <br/>
-            <button className={'product-add-button'} onClick={() => createRoom(name,type,color)}><Icon style={{fontSize:'28px'}} icon="akar-icons:circle-plus-fill" /></button>
+            <button className={'product-add-button'} onClick={() => createRoom(name,type,color)}>
+                <Icon className='icon' style={{fontSize:'28px',position:'absolute'}} icon="akar-icons:circle-plus-fill" />
+            </button>
         </motion.div>
+        <ErrorMessage message={messagePicker()} showError={isErrorVisible} onClick={setIsErrorVisible}/>
+        </div>
     )
 }

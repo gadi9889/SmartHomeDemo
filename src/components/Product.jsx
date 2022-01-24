@@ -27,7 +27,9 @@ export default function Product(props) {
 
     return (
         <div>
-            <button className="product" style={{color:logoColor,backgroundColor:backgroundColor}} onClick={() => statusChange(status)}><Icon icon={props.logoName} style={{ fontSize: '36px',position:'absolute'}}/></button>
+            <button className="product" style={{color:logoColor,backgroundColor:backgroundColor}} onClick={() => statusChange(status)}>
+                <Icon icon={props.logoName} style={{ fontSize: '36px',position:'absolute'}}/>
+            </button>
         </div>
     )
 }

@@ -4,6 +4,7 @@ import Product from './Product';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import ErrorMessage from './ErrorMessage'
 
 const roomVariants = {
     hidden: {
@@ -37,6 +38,7 @@ const roomVariants = {
 export default function Room(props) {
     const [render, setRender] = useState()
     const [isVisible, setIsVisible] = useState(false);
+    const [isErrorVisible, setIsErrorVisible] = useState(false);
 
     const change = () => {
         setIsVisible(false)
@@ -66,15 +68,17 @@ export default function Room(props) {
 
     let heaterOp = isRoomBathroom(props.roomType)
     let stereoOp = isStereoInRoom(props.stereos,props.roomIndex)
+    let limit5message = 'it seems like you have reached the 5 products limit';
 
     const addDirect = () => {
         if (props.roomItems == 5) {
-            window.alert("Reached the limit")
+            setIsErrorVisible(true)
         }
         else {
             setIsVisible(true)
         }
     }
+
     const update = (i) => {
         setRender(i)
     }
@@ -115,7 +119,7 @@ export default function Room(props) {
                 {props.stereos.map((stereo) => checkProductInRoom(props.roomIndex,stereo,props.stereoPower,"bx:bxs-music"))}
             </div>
 
-            <button className={'product-add-button'} onClick={addDirect}><Icon style={{fontSize:'28px'}} icon="akar-icons:circle-plus-fill" /></button>
+            <button className={'product-add-button'} onClick={addDirect}><Icon style={{fontSize:'28px',position:'absolute'}} icon="akar-icons:circle-plus-fill" /></button>
         </motion.div>
         {<CreateProducts
             roomIndex={props.roomIndex} 
@@ -127,6 +131,8 @@ export default function Room(props) {
             isVisible={isVisible}
             func={change}
             />}
+
+        {<ErrorMessage message={limit5message} showError={isErrorVisible} onClick={setIsErrorVisible}/>}
         </div>
     )
 }
