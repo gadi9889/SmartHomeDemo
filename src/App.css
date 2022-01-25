@@ -1,33 +1,5 @@
-.App {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  overflow: hidden;
-  background-color: rgba(0,0,0,0.02);
-}
-
-#container {
-  height: 100vh;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
+/* general */
+/* button */
 
 button {
   display: flex;
@@ -45,30 +17,18 @@ button {
   transition: 0.5s;
 }
 
-.icon {
-  font-size: 100px;
-  position:'absolute'
-}
-
-#error-container {
-  width: clamp(20%,250px,89%);
-  height: min(90%,150px);
-  border: solid rgb(93, 0, 168) 5px;
-  margin: auto;
-  padding: 3%;
-  background-color: rgba(255,255,255,0.9);
-  border-radius: 50px;
-  overflow: hidden;
-}
-
 button:hover {
   background-color: darkgrey;
   box-shadow: 0 0px 0px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
 }
 
+/* button */
+/* inputs */
+
 input {
   transition: 0.5s;
 }
+
 input:hover ,select:hover {
   box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.24), 0px 0px 1px 1px rgba(0,0,0,0.19);
 }
@@ -91,6 +51,26 @@ input[type=color] {
   margin: -20%;
 }
 
+/* inputs */
+/* general */
+
+/* App Component */
+
+.App {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.02);
+}
+
+/* App Component */
+/* CreateRoom color picker */
+
 #cp-wrap {
   overflow: hidden;
   width: 4vw;
@@ -98,11 +78,24 @@ input[type=color] {
   margin: 0 auto;
 }
 
-#product-grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* CreateRoom color picker */
+
+/* dropdown */
+/* ErrorMessage Component */
+
+#error-container {
+  width: clamp(20%,250px,89%);
+  height: min(90%,150px);
+  border: solid rgb(93, 0, 168) 5px;
+  margin: auto;
+  padding: 3%;
+  background-color: rgba(255,255,255,0.9);
+  border-radius: 50px;
+  overflow: hidden;
 }
+
+/* ErrorMessage Component */
+/* CreateProduct Component */
 
 .create-product-container {
   width: clamp(20%,300px,70%);
@@ -115,15 +108,19 @@ input[type=color] {
   overflow: hidden;
 }
 
-.svg {
-  position: absolute;
-  width: 5%;
-  overflow: visible;
-  stroke: red;
-  stroke-width: 2;
-  stroke-linejoin: miter;
-  stroke-linecap: round;
+.create-product-container h4 {
+  color:purple;
+  margin:0;
+  font-weight:bold;
 }
+
+.create-product-container select {
+  width: clamp(40%,200px);
+  height: 10vh;
+}
+
+/* CreateProduct Component */
+/* Background Component */
 
 #dropdown-background {
   display: flex;
@@ -137,6 +134,28 @@ input[type=color] {
   overflow: hidden;
 }
 
+/* Background Component */
+/* dropdown */
+/* svg */
+
+.svg {
+  position: absolute;
+  width: 30px;
+  overflow: visible;
+  stroke: red;
+  stroke-width: 2;
+  stroke-linejoin: miter;
+  stroke-linecap: round;
+}
+
+/* svg */
+/* Product Component */
+#product-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .product {
   display: flex;
   align-items: center;
@@ -145,11 +164,6 @@ input[type=color] {
   width: 12vw;
   height: 15vh;
   border: solid black 1px;
-}
-
-#product-selector {
-  width: clamp(40%,200px);
-  height: 10vh;
 }
 
 .product:hover {
@@ -169,3 +183,4 @@ input[type=color] {
   font-size: 150%;
   background-color: white;
 }
+/* Product Component */

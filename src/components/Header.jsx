@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { motion,AnimatePresence } from 'framer-motion';
-import {BrowserRouter as Router,useLocation, Routes, Route, Link} from 'react-router-dom';
+import React from 'react';
+import { motion } from 'framer-motion';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 
 const linkVariants = {
     hidden: {
@@ -31,20 +31,11 @@ const linkVariants = {
     }
 }
 
-const linksVariants = {
-    default: {
-
-    },
-    onAdd: {
-
-    }
-}
-
 export default function Header({rooms}) {
-    const hex2rgb = (hex) => {
-        const r = parseInt(hex.slice(1, 3), 16)
-        const g = parseInt(hex.slice(3, 5), 16)
-        const b = parseInt(hex.slice(5, 7), 16)
+    const hex2rgb = (hexColor) => {
+        const r = parseInt(hexColor.slice(1, 3), 16)
+        const g = parseInt(hexColor.slice(3, 5), 16)
+        const b = parseInt(hexColor.slice(5, 7), 16)
         return textColorSet([ r, g, b ])
     }
 
@@ -57,10 +48,7 @@ export default function Header({rooms}) {
         <div>
             <h1>Smart Home</h1>
             <br />
-            <motion.div
-                variants={linksVariants}
-                animate='animation'
-            >
+            <div>
                 {rooms.map((room) => {
                 return <Link to={'/'+room.type+'/'+room.name+'-'+room.index}>
                     <motion.button style={{backgroundColor: room.color, color:hex2rgb(room.color)}}
@@ -76,15 +64,16 @@ export default function Header({rooms}) {
                 })}
                 <Link to='/CreateRoom'>
                     <motion.button
-                    variants={linkVariants}
-                    initial='hidden'
-                    animate='visible'
-                    whileTap='tap'
-                    whileHover='hover'
-                    >+
+                        variants={linkVariants}
+                        initial='hidden'
+                        animate='visible'
+                        whileTap='tap'
+                        whileHover='hover'
+                    >
+                        +
                     </motion.button>
                 </Link>
-            </motion.div>
+            </div>
         </div>
     )
 }

@@ -1,10 +1,10 @@
 import React from 'react'
 import CreateProducts from './dropdown/CreateProducts';
 import Product from './Product';
+import ErrorMessage from './dropdown/ErrorMessage'
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import ErrorMessage from './dropdown/ErrorMessage'
 
 const roomVariants = {
     hidden: {
@@ -40,7 +40,7 @@ export default function Room(props) {
     const [isVisible, setIsVisible] = useState(false);
     const [isErrorVisible, setIsErrorVisible] = useState(false);
 
-    const change = () => {
+    const toggleCreateProducts = () => {
         setIsVisible(false)
     }
 
@@ -70,7 +70,7 @@ export default function Room(props) {
     let stereoOp = isStereoInRoom(props.stereos,props.roomIndex)
     let limit5message = 'it seems like you have reached the 5 products limit';
 
-    const addDirect = () => {
+    const showCreateProducts = () => {
         if (props.roomItems == 5) {
             setIsErrorVisible(true)
         }
@@ -99,40 +99,43 @@ export default function Room(props) {
     }
 
     return (
-        <div style={{width:'100vw'}}>
-        <motion.div 
-            variants={roomVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-        >
-            <h3 style={{backgroundColor:props.roomColor,color:props.fontColor}}>{props.roomName}</h3>
-            <h4>{props.roomType}</h4>
+        <div>
+            <motion.div 
+                variants={roomVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+            >
+                <h3 style={{backgroundColor:props.roomColor,color:props.fontColor}}>{props.roomName}</h3>
+                <h4>{props.roomType}</h4>
+                <div id="product-grid">
+                    {props.airCons.map((airCon) => checkProductInRoom(props.roomIndex,airCon,props.airConPower,"ac"))}
 
-            <div id="product-grid">
-                {props.airCons.map((airCon) => checkProductInRoom(props.roomIndex,airCon,props.airConPower,"ac"))}
+                    {props.heaters.map((heater) => checkProductInRoom(props.roomIndex,heater,props.heaterPower,"heater"))}
 
-                {props.heaters.map((heater) => checkProductInRoom(props.roomIndex,heater,props.heaterPower,"heater"))}
+                    {props.lights.map((light) => checkProductInRoom(props.roomIndex,light,props.lightPower,"lightbulb"))}
 
-                {props.lights.map((light) => checkProductInRoom(props.roomIndex,light,props.lightPower,"lightbulb"))}
-
-                {props.stereos.map((stereo) => checkProductInRoom(props.roomIndex,stereo,props.stereoPower,"stereo"))}
-            </div>
-
-            <button className={'product-add-button'} onClick={addDirect}><Icon style={{fontSize:'28px',position:'absolute'}} icon="akar-icons:circle-plus-fill" /></button>
-        </motion.div>
-        {<CreateProducts
-            roomIndex={props.roomIndex} 
-            addDirect={addDirect} 
-            addProductsFunc={props.addProductsFunc} 
-            items={props.roomItems} 
-            heater={heaterOp} 
-            stereo={stereoOp}
-            isVisible={isVisible}
-            func={change}
+                    {props.stereos.map((stereo) => checkProductInRoom(props.roomIndex,stereo,props.stereoPower,"stereo"))}
+                </div>
+                <button className={'product-add-button'} onClick={showCreateProducts}>
+                    <Icon style={{fontSize:'28px',position:'absolute'}} icon="akar-icons:circle-plus-fill" />
+                </button>
+            </motion.div>
+            {<CreateProducts
+                roomIndex={props.roomIndex} 
+                addProductsFunc={props.addProductsFunc} 
+                items={props.roomItems} 
+                heater={heaterOp} 
+                stereo={stereoOp}
+                isVisible={isVisible}
+                toggleComponent={toggleCreateProducts}
             />}
 
-        {<ErrorMessage message={limit5message} showError={isErrorVisible} onClick={setIsErrorVisible}/>}
+            {<ErrorMessage 
+                message={limit5message} 
+                showError={isErrorVisible} 
+                onClick={setIsErrorVisible}
+            />}
         </div>
     )
 }

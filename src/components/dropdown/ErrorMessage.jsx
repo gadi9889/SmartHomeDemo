@@ -38,7 +38,7 @@ export default function ErrorMessage({showError,message, onClick}) {
                 exit='exit'
             >
                 <h2 style={{color:'purple'}}>Error!</h2>
-                <h4 style={{}}>{message}</h4>
+                <h4>{message}</h4>
             </motion.div>
         </Background>
         )} 

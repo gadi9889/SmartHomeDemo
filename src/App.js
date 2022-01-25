@@ -1,11 +1,10 @@
 import './App.css';
-import {BrowserRouter as Router,useLocation, Routes, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router,useLocation, Routes, Route} from 'react-router-dom';
 import CreateRoom from './components/CreateRoom';
 import Header from './components/Header'
 import Room from './components/Room';
 import { useState } from 'react';
-import { motion, AnimatePresence,useCycle } from "framer-motion"
-import { type } from '@testing-library/user-event/dist/type';
+import { AnimatePresence } from "framer-motion"
 
 function App() {
   let location = useLocation();
@@ -42,7 +41,7 @@ function App() {
     }
   }
 
-  const updateItems = (roomIndex) => {
+  const updateRoomItems = (roomIndex) => {
     for (let i = 0; i < rooms.length; i++) {
       if (rooms[i].index == roomIndex) {
         rooms[i].items += 1;
@@ -72,7 +71,7 @@ function App() {
     else if (product == 'stereo') {
       stereoPush(roomIndex)
     }
-    updateItems(roomIndex)
+    updateRoomItems(roomIndex)
   }
   
   const airConPush = (roomIndex) => {
@@ -95,41 +94,32 @@ function App() {
     setLights([...lights])
   }
 
+  const productPower = (productIndex,productArray) => {
+    productArray.forEach((product) => {
+      if (product.index == productIndex) {
+        product.status = !product.status
+      }
+    })
+  }
 
   const airConPower = (airConIndex) => {
-    airCons.forEach(airCon => {
-      if (airCon.index == airConIndex) {
-        airCon.status = !airCon.status;
-        setAirCons(airCons)
-      }
-    });
+    productPower(airConIndex,airCons)
+    setAirCons(airCons)
   }
 
   const heaterPower = (heaterIndex) => {
-    heaters.forEach(heater => {
-      if (heater.index == heaterIndex) {
-        heater.status = !heater.status;
-        setHeaters(heaters)
-      }
-    });
+    productPower(heaterIndex,heaters)
+    setHeaters(heaters)
   }
 
   const lightPower = (lightIndex) => {
-    lights.forEach(light => {
-      if (light.index == lightIndex) {
-        light.status = !light.status;
-        setLights(lights)
-      }
-    });
+    productPower(lightIndex,lights)
+    setLights(lights)
   }
   
   const stereoPower = (stereoIndex) => {
-    stereos.forEach(stereo => {
-      if (stereo.index == stereoIndex) {
-        stereo.status = !stereo.status;
-        setStereos(stereos)
-      }
-    });
+    productPower(stereoIndex,stereos)
+    setStereos(stereos)
   }
 
   const hex2rgb = (hex) => {
@@ -146,7 +136,7 @@ function App() {
 
   return (
     <div className="App">
-      <div id="container">
+      <div style={{height:'100vh'}}>
         <Header rooms={rooms} visible={true}/>
 
         <AnimatePresence exitBeforeEnter>

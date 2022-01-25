@@ -19,7 +19,7 @@ const logoVariants = {
 export default function Speaker({onAnimation}) {
   return (
     <svg
-    className='svg'
+      className='svg'
       xmlns="http://www.w3.org/2000/svg"
       enableBackground="new 0 0 299.435 299.435"
       viewBox="0 0 299.435 299.435"

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Icon } from '@iconify/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { isVisible } from '@testing-library/user-event/dist/utils';
 import Background from './Background';
 
 const createProductContainerVariants = {
@@ -29,27 +28,27 @@ const createProductContainerVariants = {
 }
 
 export default function CreateProducts(props) {
-    let product = 'ac';
+    let selectedProduct = 'ac';
     
-    const getProduct = (e) => {product = e.target.value}
+    const getSelectedProduct = (e) => {selectedProduct = e.target.value}
 
     const clickHandle = (e) => {
-        props.func(false)
-        props.addProductsFunc(props.roomIndex,product)
+        props.toggleComponent(false)
+        props.addProductsFunc(props.roomIndex,selectedProduct)
     }
 
     return (
         <AnimatePresence >
             {props.isVisible && (
-                <Background onClick={props.func}>
+                <Background onClick={props.toggleComponent}>
                     <motion.div className='create-product-container' onClick={(e) => e.stopPropagation()}
                         variants={createProductContainerVariants}
                         initial='hidden'
                         animate='visible'
                         exit='exit'
                     >
-                        <h4 style={{color:'purple',margin:'0',fontWeight:'bold'}}>Select Your Product</h4>
-                        <select name="product" id="product-selector" onChange={getProduct}> 
+                        <h4>Select Your Product</h4>
+                        <select name="product" onChange={getSelectedProduct}> 
                             <option value="ac" id="ac">AC</option>
                             <option value="light" id="light">Light</option>
                             {props.heater}
